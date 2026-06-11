@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import fetchAllPokemon from "./fetchPokemonAPI";
 
+function Card({ url }) {
+  return (
+    <li>
+      <img src={url} />
+    </li>
+  );
+}
+
 function App() {
   const [pokemon, setPokemon] = useState([]);
   let fetchedPokemon = Array.isArray(pokemon);
@@ -12,9 +20,11 @@ function App() {
   if (fetchedPokemon) {
     return (
       <>
-        {pokemon.map((eachPokemon) => {
-          return <img src={eachPokemon} alt="" />;
-        })}
+        <ul>
+          {pokemon.map((eachPokemon) => {
+            return <Card key={eachPokemon} url={eachPokemon} />;
+          })}
+        </ul>
       </>
     );
   } else {
