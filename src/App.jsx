@@ -1,58 +1,52 @@
 import { useEffect, useState } from "react";
 import fetchAllPokemon from "./fetchPokemonAPI";
-
-function Card({ url, clickEvent }) {
-  return (
-    <li>
-      <img src={url} onClick={() => clickEvent()} />
-    </li>
-  );
-}
+import Card from "./components/Card";
 
 function App() {
-  const [pokemon, setPokemon] = useState([]);
+  const [pokemonArray, setPokemonArray] = useState([]);
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-  const [arrayOfChoices, setArrayOfChoices] = useState([]);
+  const [alreadyClickedArray, setAlreadyClickedArray] = useState([]);
 
-  let fetchedPokemon = Array.isArray(pokemon);
+  let pokemonArrayReady = Array.isArray(pokemonArray);
 
   function randomizingPokemonArray() {
-    setPokemon(pokemon.sort(() => Math.random() - 0.5));
+    setPokemonArray(pokemonArray.sort(() => Math.random() - 0.5));
   }
 
-  function handleClickEvent(data) {
+  function compareScores() {
+    if (currentScore > bestScore) {
+      setBestScore(currentScore);
+    }
+  }
+
+  function handleClickEvent(pokemon) {
     randomizingPokemonArray();
-    console.log(pokemon);
-    if (arrayOfChoices.includes(data)) {
-      if (currentScore > bestScore) {
-        setBestScore(currentScore);
-        setCurrentScore(0);
-        setArrayOfChoices([]);
-      } else {
-        setCurrentScore(0);
-        setArrayOfChoices([]);
-      }
+    if (alreadyClickedArray.includes(pokemon)) {
+      compareScores();
+      setCurrentScore(0);
+      setAlreadyClickedArray([]);
     } else {
-      setArrayOfChoices((prevArray) => [...prevArray, data]);
+      setAlreadyClickedArray((previousPokemon) => [
+        ...previousPokemon,
+        pokemon,
+      ]);
       setCurrentScore((prevScore) => prevScore + 1);
-      if (currentScore > bestScore) {
-        setBestScore(currentScore);
-      }
+      compareScores();
     }
   }
 
   useEffect(() => {
-    fetchAllPokemon().then((data) => setPokemon([...data]));
+    fetchAllPokemon().then((data) => setPokemonArray([...data]));
   }, []);
 
-  if (fetchedPokemon) {
+  if (pokemonArrayReady) {
     return (
       <>
         <h2>Current Score: {currentScore}</h2>
         <h2>Best Score: {bestScore}</h2>
         <ul>
-          {pokemon.map((eachPokemon) => {
+          {pokemonArray.map((eachPokemon) => {
             return (
               <Card
                 key={eachPokemon}
