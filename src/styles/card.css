@@ -1,0 +1,12 @@
+.card > img {
+  height: 300px;
+  cursor: grab;
+}
+
+.card {
+  list-style: none;
+}
+
+header > div {
+  margin-left: 1rem;
+}

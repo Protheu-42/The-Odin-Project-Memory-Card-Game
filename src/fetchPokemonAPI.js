@@ -1,4 +1,13 @@
-const pokemonNames = ["ditto", "eevee"];
+const pokemonNames = [
+  "ditto",
+  "eevee",
+  "pikachu",
+  "piplup",
+  "togepi",
+  "riolu",
+  "meowth",
+  "munchlax",
+];
 
 async function fetchAllPokemon() {
   try {

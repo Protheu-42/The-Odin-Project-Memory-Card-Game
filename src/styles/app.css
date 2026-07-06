@@ -1,0 +1,24 @@
+ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+header {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  background-color: #ef5350;
+  color: white;
+  font-weight: bolder;
+  font-size: larger;
+}
+
+header > p {
+  justify-self: center;
+  font-size: 2rem;
+}
+
+@media (max-width: 1200px) {
+  ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

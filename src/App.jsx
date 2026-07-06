@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import fetchAllPokemon from "./fetchPokemonAPI";
 import Card from "./components/Card";
+import "./styles/app.css";
 
 function App() {
   const [pokemonArray, setPokemonArray] = useState([]);
@@ -43,8 +44,13 @@ function App() {
   if (pokemonArrayReady) {
     return (
       <>
-        <h2>Current Score: {currentScore}</h2>
-        <h2>Best Score: {bestScore}</h2>
+        <header>
+          <div>
+            <p>Current Score: {currentScore}</p>
+            <p>Best Score: {bestScore}</p>
+          </div>
+          <p>Click in the pokemon bellow without repeat</p>
+        </header>
         <ul>
           {pokemonArray.map((eachPokemon) => {
             return (

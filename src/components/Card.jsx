@@ -1,6 +1,8 @@
+import "../styles/card.css";
+
 function Card({ url, clickEvent }) {
   return (
-    <li>
+    <li className="card">
       <img src={url} onClick={() => clickEvent()} />
     </li>
   );
